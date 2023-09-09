@@ -12,7 +12,7 @@ const Login = () => {
         <>
             <GhestHeader />
             <Container>
-                <Grid container direction="row" justifyContent="center" alignItems="center">
+                <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
                     <Grid item xs={7}>
                         <Box sx={{
                             backgroundImage: `url(${slide_image})`,
