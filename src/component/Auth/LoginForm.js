@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { authRequestApi } from "../../redux/requests";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -7,22 +8,46 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+    const [formData, setFormData] = React.useState({
+        email: "",
+        password: "",
+    });
+    const [showPassword, setShowPassword] = React.useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleOnChangeFormLogin = (e, type) => {
+        const previouState = { ...formData };
+        previouState[type] = e.target.value;
+        setFormData(previouState);
+    };
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
+        authRequestApi.loginUser(formData, dispatch, navigate);
     };
 
     return (
@@ -56,17 +81,43 @@ export default function SignIn() {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
+                            onChange={(e) =>
+                                handleOnChangeFormLogin(e, "email")
+                            }
                         />
-                        <TextField
+                        <FormControl
+                            variant="outlined"
                             margin="normal"
-                            required
                             fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
+                        >
+                            <InputLabel htmlFor="outlined-adornment-password">
+                                Password
+                            </InputLabel>
+                            <OutlinedInput
+                                id="password"
+                                type={showPassword ? "text" : "password"}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                            edge="end"
+                                        >
+                                            {showPassword ? (
+                                                <VisibilityOff />
+                                            ) : (
+                                                <Visibility />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                                onChange={(e) => handleOnChangeFormLogin(e, "password")}
+                            />
+                        </FormControl>
                         <Button
                             type="submit"
                             fullWidth
@@ -77,12 +128,26 @@ export default function SignIn() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link to={'/'} variant="body2" style={{ fontSize: '0.875rem', color: '#1976d2' }}>
+                                <Link
+                                    to={"/"}
+                                    variant="body2"
+                                    style={{
+                                        fontSize: "0.875rem",
+                                        color: "#1976d2",
+                                    }}
+                                >
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link to={'/sign-up'} variant="body2" style={{ fontSize: '0.875rem', color: '#1976d2' }}>
+                                <Link
+                                    to={"/sign-up"}
+                                    variant="body2"
+                                    style={{
+                                        fontSize: "0.875rem",
+                                        color: "#1976d2",
+                                    }}
+                                >
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

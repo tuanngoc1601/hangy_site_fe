@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,25 +11,37 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { authRequestApi } from "../../redux/requests";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-    const [gender, setGender] = React.useState("");
+    const [formData, setFormData] = React.useState({
+        email: "",
+        firstName: "",
+        lastName: "",
+        username: "",
+        address: "",
+        phone: "",
+        gender: "",
+        password: "",
+        confirmPassword: "",
+    });
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleChange = (event) => {
-        setGender(event.target.value);
-    };
+    const handleChangeSignupForm = (e, type) => {
+        const previouState = { ...formData };
+        previouState[type] = e.target.value;
+        setFormData(previouState);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
+        authRequestApi.registerUser(formData, dispatch, navigate);
     };
 
     return (
@@ -58,6 +70,7 @@ export default function SignUp() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                    onChange={(e) => handleChangeSignupForm(e, "email")}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -68,6 +81,7 @@ export default function SignUp() {
                                     fullWidth
                                     id="firstName"
                                     label="First Name"
+                                    onChange={(e) => handleChangeSignupForm(e, "firstName")}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -78,6 +92,7 @@ export default function SignUp() {
                                     label="Last Name"
                                     name="lastName"
                                     autoComplete="family-name"
+                                    onChange={(e) => handleChangeSignupForm(e, "lastName")}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -88,6 +103,7 @@ export default function SignUp() {
                                     label="Username"
                                     name="username"
                                     autoComplete="username"
+                                    onChange={(e) => handleChangeSignupForm(e, "username")}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -98,16 +114,18 @@ export default function SignUp() {
                                     label="Address"
                                     name="address"
                                     autoComplete="address"
+                                    onChange={(e) => handleChangeSignupForm(e, "address")}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="phonenumber"
-                                    name="phonenumber"
+                                    autoComplete="phone"
+                                    name="phone"
                                     required
                                     fullWidth
-                                    id="phonenumber"
+                                    id="phone"
                                     label="Phone Number"
+                                    onChange={(e) => handleChangeSignupForm(e, "phone")}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -119,9 +137,9 @@ export default function SignUp() {
                                         required
                                         labelId="gender"
                                         id="gender"
-                                        value={gender}
+                                        value={formData.gender}
                                         label="Gender"
-                                        onChange={handleChange}
+                                        onChange={(e) => handleChangeSignupForm(e, "gender")}
                                     >
                                         <MenuItem value={"Male"}>Male</MenuItem>
                                         <MenuItem value={"Female"}>Female</MenuItem>
@@ -138,6 +156,7 @@ export default function SignUp() {
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
+                                    onChange={(e) => handleChangeSignupForm(e, "password")}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -149,6 +168,7 @@ export default function SignUp() {
                                     type="password"
                                     id="confirmPassword"
                                     autoComplete="new-password"
+                                    onChange={(e) => handleChangeSignupForm(e, "confirmPassword")}
                                 />
                             </Grid>
                         </Grid>

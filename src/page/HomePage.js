@@ -1,10 +1,10 @@
 import React from "react";
-import GhestHeader from "../component/Header/GhestHeader";
+import Header from "../component/Header/Header";
 
 const HomePage = () => {
     return (
         <div>
-            <GhestHeader />
+            <Header />
         </div>
     );
 };

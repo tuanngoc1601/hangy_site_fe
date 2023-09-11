@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import GhestHeader from "../component/Header/GhestHeader";
+import Header from "../component/Header/Header";
 import SignUpForm from "../component/Auth/SignUpForm";
 import Footer from "../component/Footer/Footer";
 import slide_image from "../assets/images/slide_image.png";
@@ -10,7 +10,7 @@ import slide_image from "../assets/images/slide_image.png";
 const Signup = () => {
     return (
         <>
-            <GhestHeader />
+            <Header />
             <Container>
                 <Grid container direction="row" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
                     <Grid item xs={7}>

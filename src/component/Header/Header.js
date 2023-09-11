@@ -1,5 +1,4 @@
 import React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
@@ -8,9 +7,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { useSelector } from "react-redux";
 
 const pages = ["Home", "Contact", "About"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = () => {
     return (
@@ -21,6 +23,7 @@ const Search = () => {
                 display: "flex",
                 alignItems: "center",
                 padding: "5px 15px",
+                mx: 2,
             }}
         >
             <InputBase
@@ -34,14 +37,15 @@ const Search = () => {
                     padding: "4px",
                     ml: 1,
                     opacity: "0.4",
-                    cursor: "pointer"
+                    cursor: "pointer",
                 }}
             />
         </Box>
     );
 };
 
-const GhestHeader = () => {
+const Header = () => {
+    const user = useSelector((state) => state.auth.login.currentUser);
     return (
         <AppBar
             position="sticky"
@@ -101,10 +105,46 @@ const GhestHeader = () => {
                     </Box>
 
                     <Search />
+                    {user ? (
+                        <>
+                            <Box sx={{ mx: 1, cursor: "pointer" }}>
+                                <NotificationsNoneOutlinedIcon
+                                    sx={{
+                                        color: "black",
+                                        display: "block",
+                                        fontSize: "28px",
+                                        fontFamily: "Poppins",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ mx: 1, cursor: "pointer" }}>
+                                <ShoppingCartOutlinedIcon
+                                    sx={{
+                                        color: "black",
+                                        display: "block",
+                                        fontSize: "28px",
+                                        fontFamily: "Poppins",
+                                    }}
+                                />
+                            </Box>
+                            <Box sx={{ mx: 1, cursor: "pointer" }}>
+                                <AccountCircleOutlinedIcon
+                                    sx={{
+                                        color: "black",
+                                        display: "block",
+                                        fontSize: "28px",
+                                        fontFamily: "Poppins",
+                                    }}
+                                />
+                            </Box>
+                        </>
+                    ) : (
+                        ""
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>
     );
 };
 
-export default GhestHeader;
+export default Header;
