@@ -1,6 +1,6 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import store from "./redux/store";
+import { store } from "./redux/store";
 import { loginSuccess } from "./redux/authSlice";
 
 const instance = axios.create({
