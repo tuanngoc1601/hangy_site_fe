@@ -6,10 +6,14 @@ import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import AccountMenu from "./AccountMenu";
 import { useSelector } from "react-redux";
 
 const pages = ["Home", "Contact", "About"];
@@ -46,6 +50,15 @@ const Search = () => {
 
 const Header = () => {
     const user = useSelector((state) => state.auth.login.currentUser);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    
     return (
         <AppBar
             position="sticky"
@@ -107,36 +120,40 @@ const Header = () => {
                     <Search />
                     {user ? (
                         <>
-                            <Box sx={{ mx: 1, cursor: "pointer" }}>
-                                <NotificationsNoneOutlinedIcon
-                                    sx={{
-                                        color: "black",
-                                        display: "block",
-                                        fontSize: "28px",
-                                        fontFamily: "Poppins",
-                                    }}
-                                />
-                            </Box>
-                            <Box sx={{ mx: 1, cursor: "pointer" }}>
-                                <ShoppingCartOutlinedIcon
-                                    sx={{
-                                        color: "black",
-                                        display: "block",
-                                        fontSize: "28px",
-                                        fontFamily: "Poppins",
-                                    }}
-                                />
-                            </Box>
-                            <Box sx={{ mx: 1, cursor: "pointer" }}>
-                                <AccountCircleOutlinedIcon
-                                    sx={{
-                                        color: "black",
-                                        display: "block",
-                                        fontSize: "28px",
-                                        fontFamily: "Poppins",
-                                    }}
-                                />
-                            </Box>
+                            <Stack spacing={3} direction="row">
+                                <IconButton aria-label="notification">
+                                    <Badge badgeContent={4} color="secondary">
+                                        <NotificationsIcon
+                                            sx={{ width: 28, height: 28 }}
+                                        />
+                                    </Badge>
+                                </IconButton>
+                                <IconButton aria-label="cart">
+                                    <Badge badgeContent={4} color="secondary">
+                                        <ShoppingCartIcon
+                                            sx={{ width: 28, height: 28 }}
+                                        />
+                                    </Badge>
+                                </IconButton>
+                                <IconButton
+                                    onClick={handleClick}
+                                    size="small"
+                                    aria-controls={
+                                        open ? "account-menu" : undefined
+                                    }
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? "true" : undefined}
+                                >
+                                    <Avatar sx={{ width: 32, height: 32 }}>
+                                        M
+                                    </Avatar>
+                                </IconButton>
+                            </Stack>
+                            <AccountMenu
+                                open={open}
+                                handleClose={handleClose}
+                                anchorEl={anchorEl}
+                            />
                         </>
                     ) : (
                         ""
