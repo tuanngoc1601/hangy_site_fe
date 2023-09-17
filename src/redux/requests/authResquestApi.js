@@ -1,4 +1,14 @@
-import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess, registerFailed, registerStart, registerSuccess } from "../authSlice";
+import {
+    loginFailed,
+    loginStart,
+    loginSuccess,
+    logoutFailed,
+    logoutStart,
+    logoutSuccess,
+    registerFailed,
+    registerStart,
+    registerSuccess,
+} from "../authSlice";
 import { authService } from "../../service";
 
 export const loginUser = async (user, dispatch, navigate) => {
@@ -10,7 +20,7 @@ export const loginUser = async (user, dispatch, navigate) => {
     } catch (err) {
         dispatch(loginFailed());
     }
-}
+};
 
 export const registerUser = async (user, dispatch, navigate) => {
     dispatch(registerStart());
@@ -21,7 +31,7 @@ export const registerUser = async (user, dispatch, navigate) => {
     } catch (err) {
         dispatch(registerFailed());
     }
-}
+};
 
 export const logoutUser = async (dispatch, navigate) => {
     dispatch(logoutStart());
@@ -32,4 +42,4 @@ export const logoutUser = async (dispatch, navigate) => {
     } catch (err) {
         dispatch(logoutFailed());
     }
-}
+};

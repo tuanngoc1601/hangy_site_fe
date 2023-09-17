@@ -21,7 +21,7 @@ const Footer = () => {
             <Container>
                 <Grid container direction="row">
                     <Grid item xs={3}>
-                        <Stack sx={{ margin: "50px 0", padding: '10px 40px' }}>
+                        <Stack sx={{ margin: "50px 0", padding: "10px 40px" }}>
                             <p style={{ fontSize: "24px", fontWeight: "bold" }}>
                                 Exclusive
                             </p>
@@ -34,18 +34,18 @@ const Footer = () => {
                                     alignItems: "center",
                                     padding: "5px 15px",
                                     mt: "3px",
-                                    border: "1px solid #ffffff"
+                                    border: "1px solid #ffffff",
                                 }}
                             >
                                 <InputBase
                                     placeholder="Enter your email"
-                                    inputProps={{ 
+                                    inputProps={{
                                         "aria-label": "email",
                                     }}
                                     sx={{
                                         "& input": {
-                                            color: 'white',
-                                        }
+                                            color: "white",
+                                        },
                                     }}
                                 />
                                 <SendIcon
@@ -62,7 +62,7 @@ const Footer = () => {
                         </Stack>
                     </Grid>
                     <Grid item xs={3}>
-                        <Stack sx={{ margin: "50px 0", padding: '10px 40px' }}>
+                        <Stack sx={{ margin: "50px 0", padding: "10px 40px" }}>
                             <p style={{ fontSize: "20px" }}>Support</p>
                             <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
                             <p>exclusive@gmail.com</p>
@@ -70,7 +70,7 @@ const Footer = () => {
                         </Stack>
                     </Grid>
                     <Grid item xs={3}>
-                        <Stack sx={{ margin: "50px 0", padding: '10px 40px' }}>
+                        <Stack sx={{ margin: "50px 0", padding: "10px 40px" }}>
                             <p style={{ fontSize: "20px" }}>Account</p>
                             <p>My Account</p>
                             <p>Login / Register</p>
@@ -80,16 +80,16 @@ const Footer = () => {
                         </Stack>
                     </Grid>
                     <Grid item xs={3}>
-                        <Stack sx={{ margin: "50px 0", padding: '10px 40px' }}>
+                        <Stack sx={{ margin: "50px 0", padding: "10px 40px" }}>
                             <p style={{ fontSize: "20px" }}>Download App</p>
                             <p>Save $3 with App New User Only</p>
-                            <Stack 
-                                direction="row" 
-                                spacing={2} 
-                                sx={{ 
-                                    display: 'flex', 
-                                    justifyContent: 'start', 
-                                    alignItems: 'center'
+                            <Stack
+                                direction="row"
+                                spacing={2}
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "start",
+                                    alignItems: "center",
                                 }}
                             >
                                 <FacebookIcon />

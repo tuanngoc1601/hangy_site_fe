@@ -6,13 +6,13 @@ const authSlice = createSlice({
         login: {
             currentUser: null,
             pennding: false,
-            error: false
+            error: false,
         },
         register: {
             pennding: false,
             error: false,
-            success: false
-        }
+            success: false,
+        },
     },
     reducers: {
         loginStart: (state) => {
@@ -51,9 +51,9 @@ const authSlice = createSlice({
         logoutFailed: (state) => {
             state.login.pennding = false;
             state.login.error = true;
-        }
-    }
-})
+        },
+    },
+});
 
 export const {
     loginStart,
@@ -64,7 +64,7 @@ export const {
     registerFailed,
     logoutStart,
     logoutSuccess,
-    logoutFailed
+    logoutFailed,
 } = authSlice.actions;
 
 export default authSlice.reducer;

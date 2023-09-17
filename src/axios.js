@@ -6,7 +6,7 @@ const createAxiosBaseUrl = () => {
     return axios.create({
         baseURL: process.env.REACT_APP_BACKEND_URL,
     });
-}
+};
 
 const checkIfTokenExpired = (accessToken) => {
     const date = new Date();
@@ -51,7 +51,7 @@ export const createAxiosClient = (stateSuccess) => {
                 }
                 config.headers["token"] = `Bearer ${accessToken}`;
             }
-    
+
             return config;
         },
         (error) => {
@@ -60,4 +60,4 @@ export const createAxiosClient = (stateSuccess) => {
     );
 
     return instance;
-}
+};

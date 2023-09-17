@@ -18,10 +18,12 @@ function App() {
                     flexDirection: "column",
                 }}
             >
-                <Box style={{
-                    width: '100%',
-                    margin: '0 auto'
-                }}>
+                <Box
+                    style={{
+                        width: "100%",
+                        margin: "0 auto",
+                    }}
+                >
                     <Routes>
                         <Route exact path="/" element={<HomePage />} />
                         <Route path="/login" element={<Login />} />

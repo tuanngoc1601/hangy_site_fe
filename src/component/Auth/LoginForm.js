@@ -115,7 +115,9 @@ export default function SignIn() {
                                     </InputAdornment>
                                 }
                                 label="Password"
-                                onChange={(e) => handleOnChangeFormLogin(e, "password")}
+                                onChange={(e) =>
+                                    handleOnChangeFormLogin(e, "password")
+                                }
                             />
                         </FormControl>
                         <Button
