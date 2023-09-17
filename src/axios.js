@@ -39,7 +39,6 @@ export const createAxiosClient = (stateSuccess) => {
                 if (isTokenExpired) {
                     try {
                         const data = await refreshToken();
-                        console.log("1");
                         const refreshUser = {
                             ...user,
                             accessToken: data.accessToken,
