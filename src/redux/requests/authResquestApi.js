@@ -1,4 +1,4 @@
-import { loginFailed, loginStart, loginSuccess, registerFailed, registerStart, registerSuccess } from "../authSlice";
+import { loginFailed, loginStart, loginSuccess, logoutFailed, logoutStart, logoutSuccess, registerFailed, registerStart, registerSuccess } from "../authSlice";
 import { authService } from "../../service";
 
 export const loginUser = async (user, dispatch, navigate) => {
@@ -20,5 +20,16 @@ export const registerUser = async (user, dispatch, navigate) => {
         navigate("/login");
     } catch (err) {
         dispatch(registerFailed());
+    }
+}
+
+export const logoutUser = async (dispatch, navigate) => {
+    dispatch(logoutStart());
+    try {
+        await authService.handleLogoutService();
+        dispatch(logoutSuccess());
+        navigate("/login");
+    } catch (err) {
+        dispatch(logoutFailed());
     }
 }

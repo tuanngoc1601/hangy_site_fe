@@ -7,8 +7,17 @@ import Divider from "@mui/material/Divider";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import { authRequestApi } from "../../redux/requests";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AccountMenu = ({ open, handleClose, anchorEl }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        authRequestApi.logoutUser(dispatch, navigate);
+        handleClose();
+    };
 
     return (
         <Menu
@@ -65,7 +74,7 @@ const AccountMenu = ({ open, handleClose, anchorEl }) => {
                 </ListItemIcon>
                 Settings
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>

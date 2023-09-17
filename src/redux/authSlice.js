@@ -36,9 +36,21 @@ const authSlice = createSlice({
             state.register.success = true;
         },
         registerFailed: (state) => {
+            state.register.pennding = false;
+            state.register.error = true;
+            state.register.success = false;
+        },
+        logoutStart: (state) => {
+            state.login.pennding = true;
+        },
+        logoutSuccess: (state) => {
+            state.login.pennding = false;
+            state.login.currentUser = null;
+            state.login.error = false;
+        },
+        logoutFailed: (state) => {
             state.login.pennding = false;
             state.login.error = true;
-            state.register.success = false;
         }
     }
 })
@@ -49,7 +61,10 @@ export const {
     loginFailed,
     registerStart,
     registerSuccess,
-    registerFailed
+    registerFailed,
+    logoutStart,
+    logoutSuccess,
+    logoutFailed
 } = authSlice.actions;
 
 export default authSlice.reducer;
