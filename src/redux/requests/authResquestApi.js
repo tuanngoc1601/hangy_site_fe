@@ -27,7 +27,11 @@ export const registerUser = async (user, dispatch, navigate) => {
     try {
         await authService.handleRegisterService(user);
         dispatch(registerSuccess());
-        navigate("/login");
+        const userLogin = {
+            email: user.email,
+            password: user.password,
+        }
+        loginUser(userLogin, dispatch, navigate);
     } catch (err) {
         dispatch(registerFailed());
     }
