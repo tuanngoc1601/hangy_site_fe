@@ -1,11 +1,7 @@
-import axios from "axios";
-import { createAxiosClient } from "../axios";
+import { createAxiosBaseUrl, createAxiosClient } from "../axios";
 import { logoutSuccess } from "../redux/authSlice";
 
-const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL,
-    // withCredentials: true
-});
+const axiosClient = createAxiosBaseUrl();
 
 const axiosClientLogout = createAxiosClient(logoutSuccess);
 

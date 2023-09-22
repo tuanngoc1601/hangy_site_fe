@@ -2,9 +2,10 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { store } from "./redux/store";
 
-const createAxiosBaseUrl = () => {
+export const createAxiosBaseUrl = () => {
     return axios.create({
         baseURL: process.env.REACT_APP_BACKEND_URL,
+        withCredentials: true,
     });
 };
 
@@ -19,9 +20,7 @@ const checkIfTokenExpired = (accessToken) => {
 
 const refreshToken = async () => {
     try {
-        const res = await createAxiosBaseUrl().post("/api/v1/auth/refresh", {
-            withCredentials: true,
-        });
+        const res = await createAxiosBaseUrl().post("/api/v1/auth/refresh");
         return res.data;
     } catch (err) {
         console.log(err);
