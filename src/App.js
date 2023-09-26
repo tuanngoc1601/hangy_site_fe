@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
+import Header from "./component/Header/Header";
+import Footer from "./component/Footer/Footer";
 import HomePage from "./page/HomePage";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
@@ -18,6 +20,7 @@ function App() {
                     flexDirection: "column",
                 }}
             >
+                <Header />
                 <Box
                     style={{
                         width: "100%",
@@ -30,6 +33,7 @@ function App() {
                         <Route path="/sign-up" element={<Signup />} />
                     </Routes>
                 </Box>
+                <Footer />
             </div>
         </div>
     );
