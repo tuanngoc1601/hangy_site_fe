@@ -6,6 +6,7 @@ import Footer from "./component/Footer/Footer";
 import HomePage from "./page/HomePage";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
+import ProductList from "./page/ProductList";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                         <Route exact path="/" element={<HomePage />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/sign-up" element={<Signup />} />
+                        <Route path="/all-products" element={<ProductList />} />
                     </Routes>
                 </Box>
                 <Footer />
